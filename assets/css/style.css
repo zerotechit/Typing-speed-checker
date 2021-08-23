@@ -1,0 +1,646 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --ztp-button-height: 46px;
+  --ztp-button-border-size: 1px;
+  --ztp-button-border-color: #888888;
+  --ztp-button-background-color: #f0f0f0;
+  --ztp-active-button-background-color: #333333;
+  --ztp-active-button-text-color: #ffffff;
+  --ztp-text-container-background-color: #f5f0f0;
+  --ztp-text-color: #969696;
+  --ztp-text-space-color: #888888;
+  --ztp-text-wrong-color: #ca0000;
+  --ztp-header-background-color: #008b8b;
+  --ztp-header-text-color: #fbff14;
+  --ztp-header-error-text-color: #ff7b00;
+  --ztp-header-label-color: #ffffff;
+  --ztp-keyboard-section-border-size: 8px;
+  --ztp-keyboard-section-border-color: #888888;
+}
+
+body {
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  min-height: 100vh;
+}
+
+.ztp_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+/*Header*/
+.ztp_header {
+  color: var(--ztp-header-text-color);
+  background-color: var(--ztp-header-background-color);
+  padding: 20px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  vertical-align: middle;
+
+  position: sticky;
+  top: 0px;
+  z-index: 9;
+}
+
+.ztp_header div {
+  margin-right: 20px;
+}
+
+.ztp_report_label {
+  color: var(--ztp-header-label-color);
+}
+
+.ztp_report {
+  font-weight: bold;
+}
+
+.ztp_report_error {
+  color: var(--ztp-header-error-text-color);
+}
+.ztp_header_button button {
+  padding: 2px 5px;
+  background: yellow;
+  border-radius: 3px;
+}
+.ztp_setting_button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
+}
+.ztp_setting_button svg {
+  width: 23px;
+  fill: white;
+  margin-bottom: -4px;
+}
+.ztp_setting_button svg:hover {
+  fill: #f0f0f0;
+}
+/*Header*/
+/*Text Container*/
+.ztp_text_container {
+  padding: 30px;
+  background-color: var(--ztp-text-container-background-color);
+  position: relative;
+  overflow-wrap: break-word;
+}
+
+.ztp_text_container .ztp_text {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--ztp-text-color);
+  line-height: 1.8;
+  font-weight: 700;
+  font-family: Ubuntu Mono, Lucida Console, monospace;
+  font-size: 1.4em;
+  word-spacing: 4px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ztp_text_container .done {
+  color: #333333;
+}
+
+.ztp_text_container .ztp_space {
+  position: relative;
+  color: var(--ztp-text-space-color);
+}
+
+.ztp_text_container .ztp_space:after {
+  content: "␣";
+  font-size: 1.2em;
+  font-family: inherit;
+  position: absolute;
+  top: -0.4em;
+  left: 0.2em;
+}
+.ztp_text_container .ztp_newline {
+  position: relative;
+  left: 1.4em;
+}
+.ztp_text_container .ztp_newline::after {
+  content: "↩";
+  font-size: 1.2em;
+  font-family: inherit;
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 1.4;
+}
+.ztp_text_container .done::after {
+  color: #333333;
+}
+.ztp_text_container .wrong {
+  color: var(--ztp-text-wrong-color) !important;
+}
+
+.ztp_text_container .wrong::after {
+  color: var(--ztp-text-wrong-color);
+}
+/*Editor Disabled start*/
+.ztp_editor_disabled span,
+.ztp_editor_disabled .done,
+.ztp_editor_disabled .wrong,
+.ztp_editor_disabled .wrong::after,
+.ztp_editor_disabled .done::after {
+  background-color: transparent !important;
+  color: #aaaaaa !important;
+  border-color: transparent;
+}
+
+.ztp_text_container .active_character {
+  animation: text_active 0.6s infinite ease-in-out;
+}
+
+@keyframes text_active {
+  0%,
+  24%,
+  76%,
+  100% {
+    background: #333333;
+    color: white;
+  }
+
+  25%,
+  75% {
+    background: inherit;
+    color: inherit;
+  }
+}
+.ztp_cursor_stick .active_character {
+  animation: cursor_stick 0.6s infinite ease-in-out;
+}
+.ztp_cursor_stick .ztp_text span {
+  border-left: 2px solid transparent;
+  margin-left: -2px;
+}
+@keyframes cursor_stick {
+  0%,
+  24%,
+  76%,
+  100% {
+    background: transparent;
+    color: inherit;
+    border-left: 2px solid #333333;
+  }
+
+  25%,
+  75% {
+    background: inherit;
+    color: inherit;
+    border-left: 2px solid transparent;
+  }
+}
+.ztp_editor_disabled .active_character,
+.ztp_editor_disabled .active_character::after {
+  animation-play-state: paused;
+  border-left-color: transparent !important;
+}
+
+.ztp_editor_disabled::before {
+  content: "...Click or Press 'F2' to Activate...";
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  color: #606060;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.ztp_editor_disabled::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #ffffff33;
+}
+
+/*Editor disabled end*/
+
+/*Text Container end*/
+/*Keyboard Layout start*/
+.ztp_keyboard {
+  margin-top: 30px;
+  display: flex;
+  display: -webkit-flex;
+  max-width: 100%;
+  justify-content: center;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.ztp-keyboard-section-border {
+  border: var(--ztp-keyboard-section-border-size) solid
+    var(--ztp-keyboard-section-border-color);
+  border-radius: 10px;
+}
+
+.ztp_keyboard_alpha {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row wrap;
+}
+
+.ztp_k_row {
+  width: 100%;
+  height: auto;
+  display: flex;
+  display: -webkit-flex;
+  align-content: stretch;
+  background-color: var(--ztp-keyboard-section-border-color);
+}
+
+.ztp_k_col {
+  flex: 1;
+  align-content: stretch;
+}
+
+.ztp_k_col:nth-last-child(1) .ztp_k_button {
+  height: calc(
+    var(--ztp-button-height) * 2 + var(--ztp-button-border-size) * 2
+  );
+}
+
+.ztp_k_button {
+  background-color: var(--ztp-button-background-color);
+  height: var(--ztp-button-height);
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  border: var(--ztp-button-border-size) solid var(--ztp-button-border-color);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  box-shadow: inset 0 0 calc(var(--ztp-button-height) / 10) #00000055;
+}
+
+.empty_button {
+  flex: 1;
+  background-color: var(--ztp-keyboard-section-border-color);
+}
+
+.ztp_k_button[data-keypress="on"] {
+  background-color: var(--ztp-active-button-background-color);
+  color: var(--ztp-active-button-text-color);
+}
+
+.fg_1_5 {
+  flex-grow: 1.5;
+}
+
+.fg_1_75 {
+  flex-grow: 1.75;
+}
+
+.fg_2 {
+  flex-grow: 2;
+}
+
+.fg_3 {
+  flex-grow: 3;
+}
+
+.fg_6 {
+  flex-grow: 6;
+}
+
+.ztp_k_button p {
+  margin: 0;
+  padding: 0;
+}
+
+.ztp_k_button p:nth-last-child(1) {
+  font-weight: 400;
+}
+
+.ztp_keyboard_other_keys {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  margin: 0 3%;
+}
+
+.ztp_numeric {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+}
+
+.ztp_keyboard_section {
+  width: 100%;
+}
+
+/*Help box & ZTP Text Generator*/
+.help_container,
+.ztp_setting_container {
+  display: none;
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000cc;
+  overflow: auto;
+  text-align: center;
+}
+
+.ztp_container_active {
+  display: block;
+}
+
+.help_box,
+.ztp_setting_holder {
+  display: inline-block;
+  min-width: 80%;
+  min-height: 80vh;
+  margin: 20px;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  padding: 50px 50px 100px 50px;
+  border-radius: 20px;
+}
+
+.help_box h3 {
+  color: #333333;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.help_box table,
+.help_box th,
+.help_box td {
+  border: 1px solid #88888855;
+}
+
+.help_box table {
+  border-collapse: collapse;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.help_box th {
+  color: #333333;
+  padding: 10px;
+}
+
+.help_box td {
+  color: #333333;
+  padding: 10px;
+  vertical-align: center;
+  text-align: left;
+}
+
+.help_box tr td:nth-child(1) {
+  text-align: center;
+  width: 20%;
+}
+
+/*Close button*/
+.ztp_cross {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 15px;
+  cursor: pointer;
+  font-family: "open sans", sans-serif;
+  font-size: 18px;
+}
+
+.ztp_cross::before,
+.ztp_cross::after {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: #888888;
+  position: absolute;
+  left: 0;
+  top: 14px;
+  transform: rotate(45deg);
+}
+
+.ztp_cross::before {
+  transform: rotate(-45deg);
+}
+
+/*Close button*/
+/*ZTP Text Generator*/
+.ztp_setting_container {
+  background-color: #ffffff;
+  color: #666666;
+  z-index: 12;
+  padding-bottom: 50px;
+}
+.ztp_setting_holder {
+  padding-bottom: 30px;
+}
+.ztp_setting_container h2 {
+  color: #666666;
+  font-size: 2em;
+  padding: 10px 15px;
+  border: 1px dashed;
+}
+.ztp_setting_container .ztp_setting textarea {
+  width: 100%;
+  height: 228px;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  font-family: cursive;
+  border-color: lightseagreen;
+  margin: 10px auto;
+}
+.ztp_setting button {
+  padding: 10px 50px;
+  background-color: #20b2aa;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.ztp_setting button:hover {
+  background-color: #25c2ba;
+  box-shadow: 5px 10px 10px darkcyan;
+}
+.ztp_setting {
+  text-align: left;
+}
+.ztp_setting h3 {
+  background-color: #f0f0f0;
+  color: #666666;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  padding: 15px;
+}
+.ztp_setting_auto_generate,
+.ztp_setting_pest_text {
+  display: none;
+}
+.ztp_setting_content_active {
+  display: block;
+}
+.ztp_setting h4 {
+  color: #666666;
+  background-color: #f0f0ff;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.ztp_setting form {
+  padding: 10px;
+  margin: 10px 0;
+}
+.ztp_setting label {
+  margin-right: 20px;
+  cursor: pointer;
+}
+.ztp_setting p {
+  margin: 10px 0;
+  color: #aaaaaa;
+  font-size: 15px;
+}
+.ztp_setting .ztp_add_letters_to_text {
+  margin-bottom: 10px;
+}
+.ztp_setting #ztp_add_letter,
+.ztp_setting #ztp_add_character {
+  width: 95%;
+  max-width: 900px;
+  margin: 10px auto;
+  cursor: grab;
+  display: block;
+}
+.ztp_setting [type="radio"] {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #666666;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-top: -5px;
+  margin-right: 3px;
+  position: relative;
+}
+.ztp_setting [type="radio"]:checked::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #666666;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+.ztp_setting [type="checkbox"] {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #666666;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-top: -3px;
+  margin-right: 4px;
+  position: relative;
+}
+.ztp_setting [type="checkbox"]:checked::before {
+  content: "";
+  width: 20px;
+  height: 10px;
+  border-bottom: 6px solid #ffffff;
+  border-left: 5px solid #ffffff;
+  border-radius: 3px;
+  position: absolute;
+  top: -7px;
+  left: 1px;
+  transform: rotate(-45deg);
+}
+.ztp_setting [type="checkbox"]:checked::after {
+  content: "";
+  width: 20px;
+  height: 9px;
+  border-bottom: 3px solid #666666;
+  border-left: 3px solid #666666;
+  border-radius: 3px;
+  position: absolute;
+  top: -5px;
+  left: 2px;
+  transform: rotate(-45deg);
+}
+
+.ztp_setting .ztp_generated_text_example {
+  min-height: 100px;
+  border: 1px dashed;
+  margin-top: 20px;
+}
+.ztp_setting_done_button {
+  display: block;
+  margin: 0 auto;
+  padding: 15px 50px;
+  background-color: #21b3ab;
+  color: #ffffff;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ztp_setting_done_button:hover {
+  background-color: #25c2ba;
+  box-shadow: 0px 10px 10px #007c7c;
+}
+/*Generatable Text Start*/
+.ztp_setting_adable_letters {
+  width: 100%;
+}
+.ztp_setting_adable_letters ul {
+  padding: 10px;
+  display: flex;
+  display: -webkit-flex;
+}
+.ztp_setting_adable_letters ul li {
+  padding: 5px 0;
+  list-style: none;
+  text-align: center;
+  border: 1px solid #aaaaaa;
+  border-right-width: 0;
+  flex: 1;
+}
+.ztp_setting_adable_letters ul li:nth-last-child(1) {
+  border-right-width: 1px;
+}
+.ztp_setting_adable_letters ul .ztp_added_character {
+  background: #dddddd;
+}
+/*Generatable Text End*/
+/*ZTP Setting Container End*/

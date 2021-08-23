@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Type practice</title>
+  </head>
+  <body>
+    <div class="ztp_container">
+      <div class="ztp_header">
+        <div class="speed">
+          <p>
+            <span class="ztp_report_label">Speed:</span>
+            <span class="ztp_report ztp_speed">0</span> <small>(WPM)</small
+            ><sub>5</sub>
+          </p>
+        </div>
+        <div class="word_count">
+          <p>
+            <span class="ztp_report_label">Word Count:</span>
+            <span class="ztp_report ztp_word_count">0</span>
+            <small>(Words)</small>
+          </p>
+        </div>
+        <div class="character_count">
+          <p>
+            <span class="ztp_report_label">Character Count:</span>
+            <span class="ztp_report ztp_character_count">0</span>
+          </p>
+        </div>
+        <div class="ztp_error">
+          <p>
+            <span class="ztp_report_label">Wrong:</span>
+            <span class="ztp_report ztp_error_count">0</span>
+          </p>
+        </div>
+        <div class="ztp_timer">
+          <p>
+            <span class="ztp_report_label">Timer:</span>
+            <span class="ztp_report ztp_report_timer"
+              ><span class="ztp_hour">00</span>:<span class="ztp_minute"
+                >00</span
+              >:<span class="ztp_second">00</span></span
+            >
+          </p>
+        </div>
+        <div class="ztp_header_button ztp_reset">
+          <p>
+            <button class="ztp_reset_editor" onclick="reset_text()">
+              Reset
+            </button>
+          </p>
+        </div>
+        <div class="ztp_setting_button">
+          <p
+            onclick="document.querySelector('.ztp_setting_container').classList.add('ztp_container_active');"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              version="1.1"
+              id="Layer_1"
+              x="0px"
+              y="0px"
+              viewbox="0 0 512 512"
+              style="enable-background: new 0 0 512 512"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M496.659,312.107l-47.061-36.8c0.597-5.675,1.109-12.309,1.109-19.328c0-7.019-0.491-13.653-1.109-19.328l47.104-36.821 c8.747-6.912,11.136-19.179,5.568-29.397L453.331,85.76c-5.227-9.557-16.683-14.464-28.309-10.176l-55.531,22.293 c-10.645-7.68-21.803-14.165-33.344-19.349l-8.448-58.901C326.312,8.448,316.584,0,305.086,0h-98.133 c-11.499,0-21.205,8.448-22.571,19.456l-8.469,59.115c-11.179,5.035-22.165,11.435-33.28,19.349l-55.68-22.357 C76.52,71.531,64.04,76.053,58.856,85.568L9.854,170.347c-5.781,9.771-3.392,22.464,5.547,29.547l47.061,36.8 c-0.747,7.189-1.109,13.44-1.109,19.307s0.363,12.117,1.109,19.328l-47.104,36.821c-8.747,6.933-11.115,19.2-5.547,29.397 l48.939,84.672c5.227,9.536,16.576,14.485,28.309,10.176l55.531-22.293c10.624,7.659,21.781,14.144,33.323,19.349l8.448,58.88 C185.747,503.552,195.454,512,206.974,512h98.133c11.499,0,21.227-8.448,22.592-19.456l8.469-59.093 c11.179-5.056,22.144-11.435,33.28-19.371l55.68,22.357c2.688,1.045,5.483,1.579,8.363,1.579c8.277,0,15.893-4.523,19.733-11.563 l49.152-85.12C507.838,331.349,505.448,319.083,496.659,312.107z M256.019,341.333c-47.061,0-85.333-38.272-85.333-85.333 s38.272-85.333,85.333-85.333s85.333,38.272,85.333,85.333S303.08,341.333,256.019,341.333z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </p>
+        </div>
+      </div>
+      <!--ZTP Text container start-->
+      <div class="ztp_text_container" id="ztp_text_container">
+        <p class="ztp_text">
+          <span class="active_character">A</span><span class="ztp_space"> </span
+          ><span>q</span><span>u</span><span>i</span><span>c</span><span>k</span
+          ><span class="ztp_space"> </span><span>b</span><span>r</span
+          ><span>o</span><span>w</span><span>n</span
+          ><span class="ztp_space"> </span><span>f</span><span>o</span
+          ><span>x</span><span class="ztp_space"> </span><span>j</span
+          ><span>u</span><span>m</span><span>p</span><span>s</span
+          ><span class="ztp_space"> </span><span>o</span><span>v</span
+          ><span>e</span><span>r</span><span class="ztp_space"> </span
+          ><span>t</span><span>h</span><span>e</span
+          ><span class="ztp_space"> </span><span>l</span><span>a</span
+          ><span>z</span><span>y</span><span class="ztp_space"> </span
+          ><span>d</span><span>o</span><span>g</span><span>.</span
+          ><span class="ztp_space"> </span><span>A</span
+          ><span class="ztp_space"> </span><span>q</span><span>u</span
+          ><span>i</span><span>c</span><span>k</span
+          ><span class="ztp_space"> </span><span>b</span><span>r</span
+          ><span>o</span><span>w</span><span>n</span
+          ><span class="ztp_space"> </span><span>f</span><span>o</span
+          ><span>x</span><span class="ztp_space"> </span><span>j</span
+          ><span>u</span><span>m</span><span>p</span><span>s</span
+          ><span class="ztp_space"> </span><span>o</span><span>v</span
+          ><span>e</span><span>r</span><span class="ztp_space"> </span
+          ><span>t</span><span>h</span><span>e</span
+          ><span class="ztp_space"> </span><span>l</span><span>a</span
+          ><span>z</span><span>y</span><span class="ztp_space"> </span
+          ><span>d</span><span>o</span><span>g</span><span>.</span
+          ><span class="ztp_space"> </span><span>A</span
+          ><span class="ztp_space"> </span><span>q</span><span>u</span
+          ><span>i</span><span>c</span><span>k</span
+          ><span class="ztp_space"> </span><span>b</span><span>r</span
+          ><span>o</span><span>w</span><span>n</span
+          ><span class="ztp_space"> </span><span>f</span><span>o</span
+          ><span>x</span><span class="ztp_space"> </span><span>j</span
+          ><span>u</span><span>m</span><span>p</span><span>s</span
+          ><span class="ztp_space"> </span><span>o</span><span>v</span
+          ><span>e</span><span>r</span><span class="ztp_space"> </span
+          ><span>t</span><span>h</span><span>e</span
+          ><span class="ztp_space"> </span><span>l</span><span>a</span
+          ><span>z</span><span>y</span><span class="ztp_space"> </span
+          ><span>d</span><span>o</span><span>g</span><span>.</span
+          ><span class="ztp_space"> </span><span>A</span
+          ><span class="ztp_space"> </span><span>q</span><span>u</span
+          ><span>i</span><span>c</span><span>k</span
+          ><span class="ztp_space"> </span><span>b</span><span>r</span
+          ><span>o</span><span>w</span><span>n</span
+          ><span class="ztp_space"> </span><span>f</span><span>o</span
+          ><span>x</span><span class="ztp_space"> </span><span>j</span
+          ><span>u</span><span>m</span><span>p</span><span>s</span
+          ><span class="ztp_space"> </span><span>o</span><span>v</span
+          ><span>e</span><span>r</span><span class="ztp_space"> </span
+          ><span>t</span><span>h</span><span>e</span
+          ><span class="ztp_space"> </span><span>l</span><span>a</span
+          ><span>z</span><span>y</span><span class="ztp_space"> </span
+          ><span>d</span><span>o</span><span>g</span><span>.</span
+          ><span class="ztp_space"> </span><span>A</span
+          ><span class="ztp_space"> </span><span>q</span><span>u</span
+          ><span>i</span><span>c</span><span>k</span
+          ><span class="ztp_space"> </span><span>b</span><span>r</span
+          ><span>o</span><span>w</span><span>n</span
+          ><span class="ztp_space"> </span><span>f</span><span>o</span
+          ><span>x</span><span class="ztp_space"> </span><span>j</span
+          ><span>u</span><span>m</span><span>p</span><span>s</span
+          ><span class="ztp_space"> </span><span>o</span><span>v</span
+          ><span>e</span><span>r</span><span class="ztp_space"> </span
+          ><span>t</span><span>h</span><span>e</span
+          ><span class="ztp_space"> </span><span>l</span><span>a</span
+          ><span>z</span><span>y</span><span class="ztp_space"> </span
+          ><span>d</span><span>o</span><span>g</span><span>.</span
+          ><span class="ztp_text_end"></span>
+        </p>
+      </div>
+      <!--ZTP Text container End-->
+      <!--ZTP Keyboard Layout start-->
+      <div class="ztp_keyboard_layout">
+        <div class="ztp_keyboard">
+          <!--ZTP Keyboard Alpha Keys start-->
+          <div class="ztp_keyboard_alpha ztp-keyboard-section-border">
+            <div class="ztp_k_row row_01">
+              <div class="ztp_k_button">
+                <p>~</p>
+                <p data-key="Backquote">`</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>!</p>
+                <p data-key="Digit1">1</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="@">@</p>
+                <p data-key="Digit2">2</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="#">#</p>
+                <p data-key="Digit3">3</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="$">$</p>
+                <p data-key="Digit4">4</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="%">%</p>
+                <p data-key="Digit5">5</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="^">^</p>
+                <p data-key="Digit6">6</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="&amp;">&</p>
+                <p data-key="Digit7">7</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="*">*</p>
+                <p data-key="Digit8">8</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="(">(</p>
+                <p data-key="Digit9">9</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key=")">)</p>
+                <p data-key="Digit0">0</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>_</p>
+                <p data-key="Minus">-</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>+</p>
+                <p data-key="Equal">=</p>
+              </div>
+              <div class="ztp_k_button fg_2">
+                <p data-key="Backspace">Backspace</p>
+              </div>
+            </div>
+            <div class="ztp_k_row row_02">
+              <div class="ztp_k_button fg_1_5" data-key="tab">
+                <p data-key="Tab">Tab</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyQ">Q</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyW">W</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyE">E</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyR">R</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyT">T</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyY">Y</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyU">U</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyI">I</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyO">O</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyP">P</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>{</p>
+                <p data-key="BracketLeft">[</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>}</p>
+                <p data-key="BracketRight">]</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>|</p>
+                <p data-key="Backslash">\</p>
+              </div>
+            </div>
+            <div class="ztp_k_row row_03">
+              <div class="ztp_k_button fg_1_75">
+                <p data-key="CapsLock">Caps Lock</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyA">A</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyS">S</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyD">D</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyF">F</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyG">G</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyH">H</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyJ">J</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyK">K</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyL">L</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>:</p>
+                <p data-key="Semicolon">;</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>"</p>
+                <p data-key="Quote">'</p>
+              </div>
+              <div class="ztp_k_button fg_1_75">
+                <p data-key="Enter">Enter</p>
+              </div>
+            </div>
+            <div class="ztp_k_row row_04">
+              <div class="ztp_k_button fg_2">
+                <p data-key="ShiftLeft">Shift</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyZ">Z</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyX">X</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyC">C</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyV">V</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyB">B</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyN">N</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="KeyM">M</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>&lt;</p>
+                <p data-key="Comma">,</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>&gt;</p>
+                <p data-key="Period">.</p>
+              </div>
+              <div class="ztp_k_button">
+                <p>?</p>
+                <p data-key="Slash">/</p>
+              </div>
+              <div class="ztp_k_button fg_2">
+                <p data-key="ShiftRight">Shift</p>
+              </div>
+            </div>
+            <div class="ztp_k_row row_05">
+              <div class="ztp_k_button">
+                <p data-key="ControlLeft">Ctrl</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="AltLeft">Alt</p>
+              </div>
+              <div class="ztp_k_button fg_6">
+                <p data-key="Space">Space</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="AltRight">Alt</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="ControlRight">Ctrl</p>
+              </div>
+            </div>
+          </div>
+          <!--ZTP Keyboard Alpha Keys End-->
+          <!--ZTP Keyboard Other Keys start-->
+          <div class="ztp_keyboard_other_keys">
+            <div class="ztp_keyboard_section ztp-keyboard-section-border">
+              <div class="ztp_k_row">
+                <div class="ztp_k_button">
+                  <p data-key="Insert">Insert</p>
+                </div>
+                <div class="ztp_k_button">
+                  <p data-key="Home">Home</p>
+                </div>
+                <div class="ztp_k_button">
+                  <p data-key="PageUp">Page Up</p>
+                </div>
+              </div>
+              <div class="ztp_k_row">
+                <div class="ztp_k_button">
+                  <p data-key="Delete">Delete</p>
+                </div>
+                <div class="ztp_k_button">
+                  <p data-key="End">End</p>
+                </div>
+                <div class="ztp_k_button">
+                  <p data-key="PageDown">Page Down</p>
+                </div>
+              </div>
+            </div>
+            <div class="ztp_keyboard_section ztp-keyboard-section-border">
+              <div class="ztp_k_row">
+                <div class="empty_button"></div>
+                <div class="ztp_k_button">
+                  <p data-key="ArrowUp">↑</p>
+                </div>
+                <div class="empty_button"></div>
+              </div>
+              <div class="ztp_k_row">
+                <div class="ztp_k_button">
+                  <p data-key="ArrowLeft">←</p>
+                </div>
+                <div class="ztp_k_button">
+                  <p data-key="ArrowDown">↓</p>
+                </div>
+                <div class="ztp_k_button">
+                  <p data-key="ArrowRight">→</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--ZTP Keyboard Other Keys End-->
+          <!--ZTP Keyboard Numpad Keys start-->
+          <div class="ztp_numeric ztp-keyboard-section-border">
+            <!--Numpad first row-->
+            <div class="ztp_k_row">
+              <div class="ztp_k_button">
+                <p data-key="NumLock">
+                  Num<br />
+                  Lock
+                </p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="NumpadDivide">/</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="NumpadMultiply">*</p>
+              </div>
+              <div class="ztp_k_button">
+                <p data-key="NumpadSubtract">-</p>
+              </div>
+            </div>
+            <div class="ztp_k_row">
+              <div class="ztp_k_col fg_3">
+                <div class="ztp_k_row">
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad7">7</p>
+                    <p>Home</p>
+                  </div>
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad8">8</p>
+                    <p>↑</p>
+                  </div>
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad9">9</p>
+                    <p>PgUp</p>
+                  </div>
+                </div>
+                <div class="ztp_k_row">
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad4">4</p>
+                    <p>←</p>
+                  </div>
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad5">5</p>
+                  </div>
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad6">6</p>
+                    <p>→</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ztp_k_col">
+                <div class="ztp_k_row">
+                  <div class="ztp_k_button">
+                    <p data-key="NumpadAdd">+</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ztp_k_row">
+              <div class="ztp_k_col fg_3">
+                <div class="ztp_k_row">
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad1">1</p>
+                    <p>End</p>
+                  </div>
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad2">2</p>
+                    <p>↓</p>
+                  </div>
+                  <div class="ztp_k_button">
+                    <p data-key="Numpad3">3</p>
+                    <p>PgDn</p>
+                  </div>
+                </div>
+                <div class="ztp_k_row">
+                  <div class="ztp_k_button fg_2">
+                    <p data-key="Numpad0">0</p>
+                    <p>Insert</p>
+                  </div>
+                  <div class="ztp_k_button">
+                    <p data-key="NumpadDecimal">.</p>
+                    <p>Del</p>
+                  </div>
+                </div>
+              </div>
+              <div class="ztp_k_col">
+                <div class="ztp_k_row">
+                  <div class="ztp_k_button">
+                    <p data-key="NumpadEnter">Enter</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--ZTP Keyboard Numpad Keys End-->
+        </div>
+      </div>
+      <!--ZTP Keyboard Layout End-->
+    </div>
+    <!--Ztp Help box Start-->
+    <div class="help_container">
+      <div class="help_box">
+        <h3>Help & FAQs</h3>
+        <table>
+          <tr>
+            <th>Shortcut</th>
+            <th>Details</th>
+          </tr>
+          <tr>
+            <td>?</td>
+            <td>Press '?' from you keyboard to open and close help box.</td>
+          </tr>
+          <tr>
+            <td>F2</td>
+            <td>
+              By pressing 'F2' key from function keys or you can 'click' to
+              activate the editor then you can start typeing. When you press a
+              button after activating the editor timer will start counting
+              immediately.
+            </td>
+          </tr>
+          <tr>
+            <td>ESC</td>
+            <td>
+              You can press 'ESC' key to close <b>help box</b> or you can just
+              click on the cross button on top right corner. Also You can press
+              'ESC' key from your keyboard to deactivate the editor. By
+              deactivating editor timer will stop counting. To clear you will
+              need to reset the editor.
+            </td>
+          </tr>
+          <tr>
+            <td>Ctrl + Enter</td>
+            <td>
+              You can <b>reset</b> the editor by pressing 'Ctrl' + 'Enter' key
+              from your keyboard.
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div
+        class="ztp_cross"
+        onclick="this.parentNode.classList.remove('ztp_container_active');"
+      ></div>
+    </div>
+    <!--Ztp Help box End-->
+    <!--ZTP Setting Section Star-->
+    <div class="ztp_setting_container">
+      <div class="ztp_setting_holder">
+        <h2>Setting</h2>
+        <div class="ztp_setting">
+          <h3>Typing and Interface</h3>
+          <form name="ztp_cursor_type" action="">
+            <label for="ztp_bg">
+              <input
+                type="radio"
+                name="ztp_cursor"
+                id="ztp_bg"
+                checked
+                value="background"
+                onchange="cursor_changer(this)"
+              />
+              Background</label
+            >
+            <span
+              class="ztp_text_container"
+              style="
+                background: transparent;
+                padding: 0 20px 0 0;
+                margin-left: -15px;
+                font-weight: bold;
+              "
+            >
+              <span class="active_character" style="color: #333333">A</span>
+            </span>
+            <label for="ztp_stick">
+              <input
+                type="radio"
+                name="ztp_cursor"
+                id="ztp_stick"
+                value="stick"
+                onchange="cursor_changer(this)"
+              />
+              Stick</label
+            >
+            <span
+              class="ztp_cursor_stick"
+              style="
+                background: transparent;
+                padding: 0 20px 0 0;
+                margin-left: -15px;
+                font-weight: bold;
+              "
+            >
+              <span class="active_character" style="color: #333333">A</span>
+            </span>
+            <p>Select your prefered cursor and feel comfortable.</p>
+          </form>
+          <div class="ztp_stop_cursor">
+            <form name="stop_cursor_form">
+              <label for="ztp_stop_cursor">
+                <input
+                  type="checkbox"
+                  name="stop_cursor"
+                  id="ztp_stop_cursor"
+                  checked
+                />
+                <span>Stop the cursor when error happen.</span>
+              </label>
+              <p>
+                If enabled, the text cursor stops advancing until the right key
+                is pressed at the current position. If disabled, all errors will
+                be added in the text editor and must be cleared with the delete
+                or backspace key.
+              </p>
+            </form>
+          </div>
+          <div class="ztp_setting_sound">
+            <form name="ztp_sound_activity">
+              <label for="ztp_sound_active">
+                <input
+                  type="checkbox"
+                  name="ztp_sound_active"
+                  id="ztp_sound_active"
+                />
+                <span> Enable Sound </span>
+              </label>
+              <p>Make extra noise when typing and error happens.</p>
+            </form>
+          </div>
+        </div>
+        <div class="ztp_setting">
+          <h3>Text Generator</h3>
+          <form name="add_more_letter">
+            <div class="ztp_add_letters_to_text">
+              <p>Add more letters to Text:</p>
+              <input
+                type="range"
+                name="add_letter"
+                id="ztp_add_letter"
+                min="250"
+                max="350"
+                value="250"
+              />
+              <p style="text-align: center;"><b class="ztp_character_amount" style="color: #888888;">250</b> characters per season</p>
+            </div>
+
+            <label for="ztp_auto_text">
+              <input
+                type="radio"
+                id="ztp_auto_text"
+                name="text_generation"
+                value="Atuo_Generate"
+                onchange="select_text_generator(this)"
+                checked
+              />
+              Auto Generate
+            </label>
+            <label for="ztp_pest_text">
+              <input
+                type="radio"
+                id="ztp_pest_text"
+                name="text_generation"
+                value="Pest_text"
+                onchange="select_text_generator(this)"
+              />
+              Pest your Text
+            </label>
+          </form>
+          <div class="ztp_setting_auto_generate ztp_setting_content_active">
+            <h4>Auto Generate Text</h4>
+            <div class="ztp_setting_adable_letters">
+              <form name="add_character_form">
+                <p>Add more Character to Text:</p>
+                <input
+                  type="range"
+                  name="add_character"
+                  id="ztp_add_character"
+                  min="6"
+                  max="26"
+                  value="6"
+                  oninput="added_character(this)"
+                />
+                <ul class="ztp_added_character_container">
+                  <li class="ztp_added_character">E</li>
+                  <li class="ztp_added_character">A</li>
+                  <li class="ztp_added_character">N</li>
+                  <li class="ztp_added_character">R</li>
+                  <li class="ztp_added_character">I</li>
+                  <li class="ztp_added_character">T</li>
+                  <li>L</li>
+                  <li>S</li>
+                  <li>O</li>
+                  <li>U</li>
+                  <li>D</li>
+                  <li>Y</li>
+                  <li>C</li>
+                  <li>H</li>
+                  <li>G</li>
+                  <li>M</li>
+                  <li>P</li>
+                  <li>B</li>
+                  <li>K</li>
+                  <li>V</li>
+                  <li>W</li>
+                  <li>F</li>
+                  <li>Z</li>
+                  <li>X</li>
+                  <li>Q</li>
+                  <li>J</li>
+                </ul>
+              </form>
+            </div>
+            <div class="ztp_setting_inner_section">
+              <form action="">
+                <input
+                  type="checkbox"
+                  name="auto_generate"
+                  id="ztp_enable_caps"
+                />
+                <label for="ztp_enable_caps">Enable capital letters</label>
+                <input
+                  type="checkbox"
+                  name="auto_generate"
+                  id="ztp_enable_punc"
+                />
+                <label for="ztp_enable_punc">
+                  Enable punctuation characters
+                </label>
+              </form>
+            </div>
+            <div class="ztp_generated_text_example" data-start="0"></div>
+          </div>
+          <div class="ztp_setting_pest_text">
+            <h4>Pest Your Text</h4>
+            <form name="generate_text_from_input_form">
+              <textarea
+                placeholder="Pest your text here..."
+                name="usertext"
+                id="user_text_input_area"
+              ></textarea>
+              <button name="generate_text_from_input" type="button">
+                Generate
+              </button>
+            </form>
+            <div
+              class="generatable_text"
+              data-start="0"
+              style="display: none"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="ztp_setting_done_button"
+        onclick="this.parentNode.classList.remove('ztp_container_active')"
+      >
+        Done
+      </button>
+      <div
+        class="ztp_cross"
+        onclick="this.parentNode.classList.remove('ztp_container_active');"
+      ></div>
+    </div>
+    <!--ZTP Setting Section End-->
+    <p id="log"></p>
+    <script src="assets/js/index.js"></script>
+  </body>
+</html>
