@@ -59,20 +59,45 @@ function ztp_keyboard_layout_animation(e) {
   }
   //Editor active character animation and some counting
   ztp_time_start();
-  reserved_key =
-    reserved_keys +
-    "ShiftLeft ShiftRight ControlLeft ControlRight AltLeft AltRight Insert Home Delete PageUp End PageDown ArrowUp ArrowDown ArrowLeft ArrowRight NumLock";
-  let active_character = document.querySelector(".active_character");
-  let next_character = active_character.nextSibling;
-  if (!reserved_key.includes(e.code.toString())) {
+  let all_characters =
+    "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz ' \" , . / \\ ` ~ ! ? < > @ # $ % ^ & * ( ) _ - = + ; 1 2 3 4 5 6 7 8 9 0 [ ] { }";
+  var active_character = document.querySelector(".active_character");
+  var next_character = active_character.nextSibling;
+  //Delete from wrong character on press BACKSPACE
+  if (active_character.previousElementSibling.children.length >= 1 && e.key == 'Backspace') {
+    let wrong_text_length = active_character.previousElementSibling.querySelectorAll('span').length;
+    let wrong_texts = active_character.previousElementSibling.querySelectorAll('span');
+    if (wrong_text_length > 2) {
+      wrong_texts[wrong_text_length - 1].remove();
+    } else if (wrong_text_length == 2) {
+      wrong_texts[1].remove();
+      if (active_character.previousElementSibling.classList.contains('start')) {
+        active_character.previousElementSibling.innerHTML = "";
+      }
+      else if (active_character.previousElementSibling.children[0].textContent == ' ') {
+        active_character.previousElementSibling.innerHTML = " ";
+        active_character.previousElementSibling.classList.add('ztp_space');
+      }
+      else {
+        active_character.previousElementSibling.innerHTML = active_character.previousElementSibling.children[0].textContent;
+      }
+    }
+    //Sound Play
+    if (document.ztp_sound_activity.ztp_sound_active.checked) {
+      let audio = new Audio("typing-single-hit_NWM.mp3");
+      audio.volume = parseInt(document.ztp_sound_activity.ztp_sound_volume.value) / 100;
+      audio.play();
+    }
+  }
+  if (all_characters.includes(e.key.toString())) {
     if (
-      e.key == active_character.textContent ||
-      (e.key == "Enter" && active_character.innerHTML == "<br><br>")
+      e.key == active_character.textContent && !active_character.previousElementSibling.children.length > 0 ||
+      (e.key == "Enter" && active_character.innerHTML == "<br><br>" && !active_character.previousElementSibling.children.length > 0)
     ) {
       //Sound Play
       if (document.ztp_sound_activity.ztp_sound_active.checked) {
         let audio = new Audio("typing-single-hit_NWM.mp3");
-        audio.volume = 0.2;
+        audio.volume = parseInt(document.ztp_sound_activity.ztp_sound_volume.value) / 100;
         audio.play();
       }
       //Sound Play
@@ -81,11 +106,14 @@ function ztp_keyboard_layout_animation(e) {
       let character_coun = document.querySelector(".ztp_character_count");
       character_coun.textContent = parseInt(character_coun.textContent) + 1;
       //Generate text
-      if (
-        next_character.classList.contains("ztp_text_end") &&
-        document.add_more_letter.querySelector("#ztp_pest_text").checked
-      ) {
+      if (next_character.classList.contains("ztp_text_end")) {
         generate_from_generatable();
+        auto_generate_text();
+        if (document.ztp_sound_activity.ztp_sound_active.checked) {
+          let audio = new Audio("seasson_complete_sound_1.wav");
+          audio.volume = parseInt(document.ztp_sound_activity.ztp_sound_volume.value) / 100;
+          audio.play();
+        }
       }
       //Word Counter
       if (
@@ -103,7 +131,44 @@ function ztp_keyboard_layout_animation(e) {
         active_character.classList.add("done");
       }
       active_character.classList.remove("active_character");
-    } else {
+    }
+    else {
+      if (!document.stop_cursor_form.stop_cursor.checked) {
+        if (active_character.previousElementSibling.children.length == 0) {
+          if (e.key == '"') {
+            if (active_character.previousElementSibling.classList.contains('ztp_space')) {
+              active_character.previousElementSibling.classList.remove('ztp_space');
+              active_character.previousElementSibling.innerHTML = '<span class="ztp_space"> </span><span class="ztp_wrong_text">"</span>';
+            } else {
+              active_character.previousElementSibling.innerHTML = '<span>' + active_character.previousElementSibling.textContent + '</span>' + '<span class="ztp_wrong_text">"</span>';
+            }
+          } else if (e.key == ' ') {
+            if (active_character.previousElementSibling.classList.contains('ztp_space')) {
+              active_character.previousElementSibling.classList.remove('ztp_space');
+              active_character.previousElementSibling.innerHTML = "<span class='ztp_space'> </span><span class='ztp_wrong_text ztp_space'> </span>";
+            } else {
+              active_character.previousElementSibling.innerHTML = '<span>' + active_character.previousElementSibling.textContent + "</span><span class='ztp_wrong_text ztp_space'> </span>";
+            }
+          } else {
+            if (active_character.previousElementSibling.classList.contains('ztp_space')) {
+              active_character.previousElementSibling.classList.remove('ztp_space');
+              active_character.previousElementSibling.innerHTML = "<span class='ztp_space'> </span><span class='ztp_wrong_text'>" + e.key + "</span>";
+            } else {
+              active_character.previousElementSibling.innerHTML = "<span>" + active_character.previousElementSibling.textContent + "</span><span class='ztp_wrong_text'>" + e.key + "</span>";
+            }
+          }
+        }
+        else if (active_character.previousElementSibling.children.length < 10) {
+          if (e.code == 'Quote' && e.shiftKey) {
+            active_character.previousElementSibling.innerHTML = active_character.previousElementSibling.innerHTML + '<span class="ztp_wrong_text">"</span>';
+          } else if (e.key == " ") {
+            active_character.previousElementSibling.innerHTML = active_character.previousElementSibling.innerHTML + '<span class="ztp_wrong_text ztp_space"></span>';
+          } else {
+            active_character.previousElementSibling.innerHTML = active_character.previousElementSibling.innerHTML + '<span class="ztp_wrong_text">' + e.key + '</span>';
+          }
+        }
+
+      }
       if (
         !active_character.classList.contains("wrong") &&
         !active_character.classList.contains("ztp_error_counted") &&
@@ -118,13 +183,22 @@ function ztp_keyboard_layout_animation(e) {
         active_character.classList.add("wrong");
         //Sound Play
         if (document.ztp_sound_activity.ztp_sound_active.checked) {
-          let audio = new Audio("Beep_Computer_06.wav");
-          audio.volume = 0.3;
+          let audio = new Audio("error_tonal_buzz3_2.wav");
+          audio.volume = parseInt(document.ztp_sound_activity.ztp_sound_volume.value) / 100;
           audio.play();
         }
         //Sound Play
       }
     }
+  }
+}
+//Sound volume activity function
+document.ztp_sound_activity.ztp_sound_volume.addEventListener('input', sound_activiry);
+function sound_activiry() {
+  document.ztp_sound_activity.querySelector('.ztp_sound_volume_value').innerHTML = document.ztp_sound_activity.ztp_sound_volume.value;
+  document.ztp_sound_activity.ztp_sound_active.checked = true;
+  if (parseInt(document.ztp_sound_activity.ztp_sound_volume.value) == 0) {
+    document.ztp_sound_activity.ztp_sound_active.checked = false;
   }
 }
 //Reset function
@@ -136,6 +210,14 @@ document.addEventListener("keydown", function (e) {
     document
       .querySelector(".ztp_text_container")
       .classList.remove("ztp_editor_disabled");
+  }
+  if (e.key == 'ArrowUp') {
+    document.ztp_sound_activity.ztp_sound_volume.value = parseInt(document.ztp_sound_activity.ztp_sound_volume.value) + 10;
+    sound_activiry();
+  }
+  if (e.key == 'ArrowDown') {
+    document.ztp_sound_activity.ztp_sound_volume.value = parseInt(document.ztp_sound_activity.ztp_sound_volume.value) - 10;
+    sound_activiry();
   }
 });
 function reset_text() {
@@ -160,7 +242,7 @@ function reset_text() {
   document
     .querySelector(".active_character")
     .classList.remove("active_character");
-  text_content[0].classList.add("active_character");
+  text_content[1].classList.add("active_character");
 }
 
 //Speed count
@@ -252,10 +334,18 @@ document.addEventListener("keydown", function (e) {
       } else {
         help_container.classList.add("ztp_container_active");
       }
-    } else if (e.key == "Escape") {
+    } else if (e.key == "Escape" && document.querySelector('.ztp_setting_container ').classList.contains('ztp_container_active') || e.key == "Escape" && document.querySelector('.help_container').classList.contains('ztp_container_active')) {
       document
         .querySelector(".ztp_container_active")
         .classList.remove("ztp_container_active");
+    } else if (e.key == 'S' && e.ctrlKey) {
+      document.querySelector('.ztp_setting_container').classList.add('ztp_container_active');
+    } else if (e.key == 'c' && e.ctrlKey && e.altKey) {
+      if (document.stop_cursor_form.stop_cursor.checked) {
+        document.stop_cursor_form.stop_cursor.checked = false;
+      } else {
+        document.stop_cursor_form.stop_cursor.checked = true;
+      }
     }
   }
 });
@@ -301,35 +391,40 @@ function added_character(e) {
       character_holder[i].classList.remove("ztp_added_character");
     }
   }
+  auto_generate_text();
 }
 //Generate text from input
 document.generate_text_from_input_form.generate_text_from_input.addEventListener(
   "click",
   function () {
-    document.querySelector(".generatable_text").dataset.start = 0;
-    document.querySelector(".generatable_text").textContent =
-      document.generate_text_from_input_form.usertext.value;
-    document.generate_text_from_input_form.usertext.value = "";
-    document
-      .querySelector(".ztp_setting_container")
-      .classList.remove("ztp_container_active");
-    generate_from_generatable();
-  }
-);
+    let minimun_character = parseInt(document.generate_text_from_input_form.querySelector('.ztp_minimum_character_amount').textContent);
+    let written_character = document.generate_text_from_input_form.usertext.value.length;
+    if (minimun_character <= written_character) {
+      document.querySelector(".generatable_text").dataset.start = 0;
+      document.querySelector(".generatable_text").textContent =
+        document.generate_text_from_input_form.usertext.value;
+      document
+        .querySelector(".ztp_setting_container")
+        .classList.remove("ztp_container_active");
+      generate_from_generatable();
+    }
+  });
 function generate_from_generatable() {
-  let start = parseInt(
-    document.querySelector(".generatable_text").dataset.start
-  );
-  let texts = document.querySelector(".generatable_text").textContent;
-  let add_letter_value = parseInt(document.add_more_letter.add_letter.value);
-  let end = add_letter_value + start;
-  if (start + add_letter_value < texts.length) {
-    generate_text(texts, start, end);
-    document.querySelector(".generatable_text").dataset.start =
-      add_letter_value + start;
-  } else {
-    generate_text(texts, start, texts.length);
-    document.querySelector(".generatable_text").dataset.start = 0;
+  if (document.add_more_letter.querySelector("#ztp_pest_text").checked) {
+    let start = parseInt(
+      document.querySelector(".generatable_text").dataset.start
+    );
+    let texts = document.querySelector(".generatable_text").textContent;
+    let add_letter_value = parseInt(document.add_more_letter.add_letter.value);
+    let end = add_letter_value + start;
+    if (start + add_letter_value < texts.length) {
+      generate_text(texts, start, end);
+      document.querySelector(".generatable_text").dataset.start =
+        add_letter_value + start;
+    } else {
+      generate_text(texts, start, texts.length);
+      document.querySelector(".generatable_text").dataset.start = 0;
+    }
   }
 }
 
@@ -337,7 +432,7 @@ function generate_text(e, start, end) {
   let text_holder = document.querySelector(".ztp_text");
   let generated_text = "";
   let all_characters =
-    "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz ' , . / \\ ` ~ ! @ # $ % ^ & * ( ) _ - = + ; ";
+    "Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz ' , . / \\ ` ~ ! ? < > @ # $ % ^ & * ( ) _ - = + ; 1 2 3 4 5 6 7 8 9 0 [ ] { }";
   let new_line_checker = "";
   for (let i = start; i < end; i++) {
     if (e[i] == " ") {
@@ -359,11 +454,63 @@ function generate_text(e, start, end) {
     }
   }
   generated_text += '<span class="ztp_text_end"></span>';
+  generated_text = '<span class="start"></span>' + generated_text;
   text_holder.innerHTML = generated_text;
-  text_holder.querySelector("span").classList.add("active_character");
+  text_holder.querySelectorAll("span")[1].classList.add("active_character");
+  //generated text example
 }
 //ztp_add_letters_to_text
 document.add_more_letter.add_letter.addEventListener("input", function () {
   document.querySelector(".ztp_character_amount").textContent =
     document.add_more_letter.add_letter.value;
+  document.generate_text_from_input_form.querySelector('.ztp_minimum_character_amount').textContent = document.add_more_letter.add_letter.value;
 });
+//Minimum Character check on Pest Text
+document.generate_text_from_input_form.usertext.addEventListener('input', function () {
+  let minimun_character = parseInt(document.generate_text_from_input_form.querySelector('.ztp_minimum_character_amount').textContent);
+  let written_character = document.generate_text_from_input_form.usertext.value.length;
+  document.querySelector('.ztp_pest_text_character_count').textContent = written_character;
+  if (written_character < minimun_character) {
+    document.querySelector('.ztp_pest_text_character_count').style.color = 'red';
+  } else {
+    document.querySelector('.ztp_pest_text_character_count').style.color = 'yellowgreen';
+  }
+});
+//Atuo Generate Text Functions
+document.add_more_letter.add_letter.addEventListener('input', auto_generate_text);
+function auto_generate_text() {
+  //random generator
+  function randInt(min, max) {
+    return parseInt(Math.random() * (max - min) + min);
+  }
+  //random generator end
+  if (document.querySelector('#ztp_auto_text').checked) {
+    let character_list = ['e', 'a', 'n', 'r', 'i', 't', 'l', 's', 'o', 'u', 'd', 'y', 'c', 'h', 'g', 'm', 'p', 'b', 'k', 'v', 'w', 'f', 'z', 'x', 'q', 'j'];
+    let punctuations = [",", ".", "?", "'", "\"", "/", ":", ";", "!", "\\", "~", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "=", "+", "<", ">", "[", "]", "{", "}"]
+    let letter_usability_count = parseInt(document.add_character_form.add_character.value);
+    let enable_capital = document.enable_capital_punctuation.enable_capital.checked;
+    let enable_punctuation = document.enable_capital_punctuation.enable_punctuation.checked;
+    let text_length = parseInt(document.add_more_letter.add_letter.value);
+    let word_max_size = 5 + (letter_usability_count / 10);
+    let generating_text = "";
+
+    for (let i = 0; i == 0;) {
+      if (generating_text.length > text_length) { break }
+      let word_size = randInt(1, word_max_size);
+      if (enable_capital) {
+        generating_text += character_list[randInt(0, letter_usability_count)].toUpperCase();
+        word_size -= 1;
+      }
+      for (let x = 0; x < word_size; x++) {
+        generating_text += character_list[randInt(0, letter_usability_count)];
+      }
+      if (enable_punctuation) {
+        generating_text += punctuations[Math.floor(Math.random() * punctuations.length)] + " ";
+      } else {
+        generating_text += " ";
+      }
+    }
+    generate_text(generating_text, 0, text_length);
+    document.querySelector('.ztp_generated_text_example').innerHTML = "<p>" + generating_text + "</p>";
+  }
+}

@@ -10,92 +10,126 @@
   <body>
     <div class="ztp_container">
       <div class="ztp_header">
-        <div class="speed">
-          <p>
-            <span class="ztp_report_label">Speed:</span>
-            <span class="ztp_report ztp_speed">0</span> <small>(WPM)</small
-            ><sub>5</sub>
-          </p>
-        </div>
-        <div class="word_count">
-          <p>
-            <span class="ztp_report_label">Word Count:</span>
-            <span class="ztp_report ztp_word_count">0</span>
-            <small>(Words)</small>
-          </p>
-        </div>
-        <div class="character_count">
-          <p>
-            <span class="ztp_report_label">Character Count:</span>
-            <span class="ztp_report ztp_character_count">0</span>
-          </p>
-        </div>
-        <div class="ztp_error">
-          <p>
-            <span class="ztp_report_label">Wrong:</span>
-            <span class="ztp_report ztp_error_count">0</span>
-          </p>
-        </div>
-        <div class="ztp_timer">
-          <p>
-            <span class="ztp_report_label">Timer:</span>
-            <span class="ztp_report ztp_report_timer"
-              ><span class="ztp_hour">00</span>:<span class="ztp_minute"
-                >00</span
-              >:<span class="ztp_second">00</span></span
+        <div class="ztp_header_section ztp_main_header">
+          <div class="speed">
+            <p>
+              <span class="ztp_report_label">Speed:</span>
+              <span class="ztp_report ztp_speed">0</span>
+              <span class="ztp_report">(WPM)</span>
+            </p>
+          </div>
+          <div class="word_count">
+            <p>
+              <span class="ztp_report_label">Word Count:</span>
+              <span class="ztp_report ztp_word_count">0</span>
+            </p>
+          </div>
+          <div class="character_count">
+            <p>
+              <span class="ztp_report_label">Character Count:</span>
+              <span class="ztp_report ztp_character_count">0</span>
+            </p>
+          </div>
+          <div class="ztp_error">
+            <p>
+              <span class="ztp_report_label">Wrong:</span>
+              <span class="ztp_report ztp_error_count">0</span>
+            </p>
+          </div>
+          <div class="ztp_timer">
+            <p>
+              <span class="ztp_report_label">Timer:</span>
+              <span class="ztp_report ztp_report_timer"
+                ><span class="ztp_hour">00</span>:<span class="ztp_minute"
+                  >00</span
+                >:<span class="ztp_second">00</span></span
+              >
+            </p>
+          </div>
+          <div class="ztp_header_button ztp_reset">
+            <p>
+              <button class="ztp_reset_editor" onclick="reset_text()">
+                Reset
+              </button>
+            </p>
+          </div>
+          <div class="ztp_setting_button">
+            <p
+              onclick="document.querySelector('.ztp_setting_container').classList.add('ztp_container_active');"
             >
-          </p>
-        </div>
-        <div class="ztp_header_button ztp_reset">
-          <p>
-            <button class="ztp_reset_editor" onclick="reset_text()">
-              Reset
-            </button>
-          </p>
-        </div>
-        <div class="ztp_setting_button">
-          <p
-            onclick="document.querySelector('.ztp_setting_container').classList.add('ztp_container_active');"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              id="Layer_1"
-              x="0px"
-              y="0px"
-              viewbox="0 0 512 512"
-              style="enable-background: new 0 0 512 512"
-              xml:space="preserve"
-            >
-              <g>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                version="1.1"
+                id="Layer_1"
+                x="0px"
+                y="0px"
+                viewbox="0 0 512 512"
+                style="enable-background: new 0 0 512 512"
+                xml:space="preserve"
+              >
                 <g>
-                  <path
-                    d="M496.659,312.107l-47.061-36.8c0.597-5.675,1.109-12.309,1.109-19.328c0-7.019-0.491-13.653-1.109-19.328l47.104-36.821 c8.747-6.912,11.136-19.179,5.568-29.397L453.331,85.76c-5.227-9.557-16.683-14.464-28.309-10.176l-55.531,22.293 c-10.645-7.68-21.803-14.165-33.344-19.349l-8.448-58.901C326.312,8.448,316.584,0,305.086,0h-98.133 c-11.499,0-21.205,8.448-22.571,19.456l-8.469,59.115c-11.179,5.035-22.165,11.435-33.28,19.349l-55.68-22.357 C76.52,71.531,64.04,76.053,58.856,85.568L9.854,170.347c-5.781,9.771-3.392,22.464,5.547,29.547l47.061,36.8 c-0.747,7.189-1.109,13.44-1.109,19.307s0.363,12.117,1.109,19.328l-47.104,36.821c-8.747,6.933-11.115,19.2-5.547,29.397 l48.939,84.672c5.227,9.536,16.576,14.485,28.309,10.176l55.531-22.293c10.624,7.659,21.781,14.144,33.323,19.349l8.448,58.88 C185.747,503.552,195.454,512,206.974,512h98.133c11.499,0,21.227-8.448,22.592-19.456l8.469-59.093 c11.179-5.056,22.144-11.435,33.28-19.371l55.68,22.357c2.688,1.045,5.483,1.579,8.363,1.579c8.277,0,15.893-4.523,19.733-11.563 l49.152-85.12C507.838,331.349,505.448,319.083,496.659,312.107z M256.019,341.333c-47.061,0-85.333-38.272-85.333-85.333 s38.272-85.333,85.333-85.333s85.333,38.272,85.333,85.333S303.08,341.333,256.019,341.333z"
-                  ></path>
+                  <g>
+                    <path
+                      d="M496.659,312.107l-47.061-36.8c0.597-5.675,1.109-12.309,1.109-19.328c0-7.019-0.491-13.653-1.109-19.328l47.104-36.821 c8.747-6.912,11.136-19.179,5.568-29.397L453.331,85.76c-5.227-9.557-16.683-14.464-28.309-10.176l-55.531,22.293 c-10.645-7.68-21.803-14.165-33.344-19.349l-8.448-58.901C326.312,8.448,316.584,0,305.086,0h-98.133 c-11.499,0-21.205,8.448-22.571,19.456l-8.469,59.115c-11.179,5.035-22.165,11.435-33.28,19.349l-55.68-22.357 C76.52,71.531,64.04,76.053,58.856,85.568L9.854,170.347c-5.781,9.771-3.392,22.464,5.547,29.547l47.061,36.8 c-0.747,7.189-1.109,13.44-1.109,19.307s0.363,12.117,1.109,19.328l-47.104,36.821c-8.747,6.933-11.115,19.2-5.547,29.397 l48.939,84.672c5.227,9.536,16.576,14.485,28.309,10.176l55.531-22.293c10.624,7.659,21.781,14.144,33.323,19.349l8.448,58.88 C185.747,503.552,195.454,512,206.974,512h98.133c11.499,0,21.227-8.448,22.592-19.456l8.469-59.093 c11.179-5.056,22.144-11.435,33.28-19.371l55.68,22.357c2.688,1.045,5.483,1.579,8.363,1.579c8.277,0,15.893-4.523,19.733-11.563 l49.152-85.12C507.838,331.349,505.448,319.083,496.659,312.107z M256.019,341.333c-47.061,0-85.333-38.272-85.333-85.333 s38.272-85.333,85.333-85.333s85.333,38.272,85.333,85.333S303.08,341.333,256.019,341.333z"
+                    ></path>
+                  </g>
                 </g>
-              </g>
-            </svg>
+              </svg>
+            </p>
+          </div>
+        </div>
+        <div class="ztp_header_section">
+          <p>
+            <span class="ztp_report_label">All Characters: </span>
+            <span class="ztp_report_label ztp_characters ztp_added_character"
+              >E</span
+            >
+            <span class="ztp_report_label ztp_characters ztp_added_character"
+              >N</span
+            >
+            <span class="ztp_report_label ztp_characters ztp_added_character"
+              >R</span
+            >
+            <span class="ztp_report_label ztp_characters ztp_added_character"
+              >I</span
+            >
+            <span class="ztp_report_label ztp_characters ztp_added_character"
+              >T</span
+            >
+            <span class="ztp_report_label ztp_characters">L</span>
+            <span class="ztp_report_label ztp_characters">S</span>
+            <span class="ztp_report_label ztp_characters">O</span>
+            <span class="ztp_report_label ztp_characters">U</span>
+            <span class="ztp_report_label ztp_characters">D</span>
+            <span class="ztp_report_label ztp_characters">Y</span>
+            <span class="ztp_report_label ztp_characters">C</span>
+            <span class="ztp_report_label ztp_characters">H</span>
+            <span class="ztp_report_label ztp_characters">G</span>
+            <span class="ztp_report_label ztp_characters">M</span>
+            <span class="ztp_report_label ztp_characters">P</span>
+            <span class="ztp_report_label ztp_characters">B</span>
+            <span class="ztp_report_label ztp_characters">K</span>
+            <span class="ztp_report_label ztp_characters">V</span>
+            <span class="ztp_report_label ztp_characters">W</span>
+            <span class="ztp_report_label ztp_characters">F</span>
+            <span class="ztp_report_label ztp_characters">Z</span>
+            <span class="ztp_report_label ztp_characters">X</span>
+            <span class="ztp_report_label ztp_characters">Q</span>
+            <span class="ztp_report_label ztp_characters">J</span>
+          </p>
+        </div>
+        <div class="ztp_header_section">
+          <p>
+            <span class="ztp_report_label">Calculating now: </span
+            ><span class="ztp_calibrating_now ztp_report">B</span>
           </p>
         </div>
       </div>
       <!--ZTP Text container start-->
       <div class="ztp_text_container" id="ztp_text_container">
         <p class="ztp_text">
-          <span class="active_character">A</span><span class="ztp_space"> </span
-          ><span>q</span><span>u</span><span>i</span><span>c</span><span>k</span
-          ><span class="ztp_space"> </span><span>b</span><span>r</span
-          ><span>o</span><span>w</span><span>n</span
-          ><span class="ztp_space"> </span><span>f</span><span>o</span
-          ><span>x</span><span class="ztp_space"> </span><span>j</span
-          ><span>u</span><span>m</span><span>p</span><span>s</span
-          ><span class="ztp_space"> </span><span>o</span><span>v</span
-          ><span>e</span><span>r</span><span class="ztp_space"> </span
-          ><span>t</span><span>h</span><span>e</span
-          ><span class="ztp_space"> </span><span>l</span><span>a</span
-          ><span>z</span><span>y</span><span class="ztp_space"> </span
-          ><span>d</span><span>o</span><span>g</span><span>.</span
-          ><span class="ztp_space"> </span><span>A</span
+          <span class="start"></span><span class="active_character">A</span
           ><span class="ztp_space"> </span><span>q</span><span>u</span
           ><span>i</span><span>c</span><span>k</span
           ><span class="ztp_space"> </span><span>b</span><span>r</span
@@ -160,8 +194,8 @@
         <div class="ztp_keyboard">
           <!--ZTP Keyboard Alpha Keys start-->
           <div class="ztp_keyboard_alpha ztp-keyboard-section-border">
-            <div class="ztp_k_row row_01">
-              <div class="ztp_k_button">
+            <div class="ztp_k_row ztp_row_01">
+              <div class="ztp_k_button" style="border-radius: 8px 0 0 0">
                 <p>~</p>
                 <p data-key="Backquote">`</p>
               </div>
@@ -213,11 +247,11 @@
                 <p>+</p>
                 <p data-key="Equal">=</p>
               </div>
-              <div class="ztp_k_button fg_2">
+              <div class="ztp_k_button fg_2" style="border-radius: 0 8px 0 0">
                 <p data-key="Backspace">Backspace</p>
               </div>
             </div>
-            <div class="ztp_k_row row_02">
+            <div class="ztp_k_row ztp_row_02">
               <div class="ztp_k_button fg_1_5" data-key="tab">
                 <p data-key="Tab">Tab</p>
               </div>
@@ -264,7 +298,7 @@
                 <p data-key="Backslash">\</p>
               </div>
             </div>
-            <div class="ztp_k_row row_03">
+            <div class="ztp_k_row ztp_row_03">
               <div class="ztp_k_button fg_1_75">
                 <p data-key="CapsLock">Caps Lock</p>
               </div>
@@ -307,7 +341,7 @@
                 <p data-key="Enter">Enter</p>
               </div>
             </div>
-            <div class="ztp_k_row row_04">
+            <div class="ztp_k_row ztp_row_04">
               <div class="ztp_k_button fg_2">
                 <p data-key="ShiftLeft">Shift</p>
               </div>
@@ -348,8 +382,8 @@
                 <p data-key="ShiftRight">Shift</p>
               </div>
             </div>
-            <div class="ztp_k_row row_05">
-              <div class="ztp_k_button">
+            <div class="ztp_k_row ztp_row_05">
+              <div class="ztp_k_button" style="border-radius: 0 0 0 8px">
                 <p data-key="ControlLeft">Ctrl</p>
               </div>
               <div class="ztp_k_button">
@@ -361,7 +395,7 @@
               <div class="ztp_k_button">
                 <p data-key="AltRight">Alt</p>
               </div>
-              <div class="ztp_k_button">
+              <div class="ztp_k_button" style="border-radius: 0 0 8px 0">
                 <p data-key="ControlRight">Ctrl</p>
               </div>
             </div>
@@ -371,24 +405,24 @@
           <div class="ztp_keyboard_other_keys">
             <div class="ztp_keyboard_section ztp-keyboard-section-border">
               <div class="ztp_k_row">
-                <div class="ztp_k_button">
+                <div class="ztp_k_button" style="border-radius: 8px 0 0 0">
                   <p data-key="Insert">Insert</p>
                 </div>
                 <div class="ztp_k_button">
                   <p data-key="Home">Home</p>
                 </div>
-                <div class="ztp_k_button">
+                <div class="ztp_k_button" style="border-radius: 0 8px 0 0">
                   <p data-key="PageUp">Page Up</p>
                 </div>
               </div>
               <div class="ztp_k_row">
-                <div class="ztp_k_button">
+                <div class="ztp_k_button" style="border-radius: 0 0 0 8px">
                   <p data-key="Delete">Delete</p>
                 </div>
                 <div class="ztp_k_button">
                   <p data-key="End">End</p>
                 </div>
-                <div class="ztp_k_button">
+                <div class="ztp_k_button" style="border-radius: 0 0 8px 0">
                   <p data-key="PageDown">Page Down</p>
                 </div>
               </div>
@@ -396,19 +430,26 @@
             <div class="ztp_keyboard_section ztp-keyboard-section-border">
               <div class="ztp_k_row">
                 <div class="empty_button"></div>
-                <div class="ztp_k_button">
+                <div
+                  class="ztp_k_button"
+                  style="
+                    border-radius: 5px 5px 0 0;
+                    border-right: var(--ztp-button-border-size) solid
+                      var(--ztp-button-border-color);
+                  "
+                >
                   <p data-key="ArrowUp">↑</p>
                 </div>
                 <div class="empty_button"></div>
               </div>
               <div class="ztp_k_row">
-                <div class="ztp_k_button">
+                <div class="ztp_k_button" style="border-radius: 5px 0 0 5px">
                   <p data-key="ArrowLeft">←</p>
                 </div>
                 <div class="ztp_k_button">
                   <p data-key="ArrowDown">↓</p>
                 </div>
-                <div class="ztp_k_button">
+                <div class="ztp_k_button" style="border-radius: 0 5px 5px 0">
                   <p data-key="ArrowRight">→</p>
                 </div>
               </div>
@@ -419,7 +460,7 @@
           <div class="ztp_numeric ztp-keyboard-section-border">
             <!--Numpad first row-->
             <div class="ztp_k_row">
-              <div class="ztp_k_button">
+              <div class="ztp_k_button" style="border-radius: 8px 0 0 0">
                 <p data-key="NumLock">
                   Num<br />
                   Lock
@@ -431,7 +472,7 @@
               <div class="ztp_k_button">
                 <p data-key="NumpadMultiply">*</p>
               </div>
-              <div class="ztp_k_button">
+              <div class="ztp_k_button" style="border-radius: 0 8px 0 0">
                 <p data-key="NumpadSubtract">-</p>
               </div>
             </div>
@@ -490,7 +531,10 @@
                   </div>
                 </div>
                 <div class="ztp_k_row">
-                  <div class="ztp_k_button fg_2">
+                  <div
+                    class="ztp_k_button fg_2"
+                    style="border-radius: 0 0 0 8px"
+                  >
                     <p data-key="Numpad0">0</p>
                     <p>Insert</p>
                   </div>
@@ -502,7 +546,7 @@
               </div>
               <div class="ztp_k_col">
                 <div class="ztp_k_row">
-                  <div class="ztp_k_button">
+                  <div class="ztp_k_button" style="border-radius: 0 0 8px 0">
                     <p data-key="NumpadEnter">Enter</p>
                   </div>
                 </div>
@@ -551,6 +595,30 @@
             <td>
               You can <b>reset</b> the editor by pressing 'Ctrl' + 'Enter' key
               from your keyboard.
+            </td>
+          </tr>
+          <tr>
+            <td>Ctrl + Shift + S</td>
+            <td>
+              You can press the 'S' key by pressing and holding down the Ctrl
+              key and the Shift key from your keyboard to open the setting
+              panel.
+            </td>
+          </tr>
+          <tr>
+            <td>↑ ↓</td>
+            <td>
+              You can press '↑' Up Arrow key from your keyboard to enable sound
+              and increase volume by a factor of 10 out of 100 and also press
+              '↓' Down Arrow key to decrease volume by a factor of 10 out of
+              100. When volume is '0' the sound will be disabled.
+            </td>
+          </tr>
+          <tr>
+            <td>Ctrl + Alt + C</td>
+            <td>
+              You can press and hold Control key and Alt key and then press 'C'
+              to enable and disable "Stop the cursor when error happen" setting.
             </td>
           </tr>
         </table>
@@ -620,7 +688,6 @@
                   type="checkbox"
                   name="stop_cursor"
                   id="ztp_stop_cursor"
-                  checked
                 />
                 <span>Stop the cursor when error happen.</span>
               </label>
@@ -634,14 +701,27 @@
           </div>
           <div class="ztp_setting_sound">
             <form name="ztp_sound_activity">
-              <label for="ztp_sound_active">
-                <input
-                  type="checkbox"
-                  name="ztp_sound_active"
-                  id="ztp_sound_active"
-                />
-                <span> Enable Sound </span>
-              </label>
+              <div class="ztp_enable_sound_holder">
+                <label for="ztp_sound_active">
+                  <input
+                    type="checkbox"
+                    name="ztp_sound_active"
+                    id="ztp_sound_active"
+                  />
+                  <span> Enable Sound </span>
+                </label>
+                <label for="ztp_sound_volume" class="ztp_sound_volume">
+                  <input
+                    type="range"
+                    name="ztp_sound_volume"
+                    id="ztp_sound_volume"
+                    min="0"
+                    max="100"
+                    value="50"
+                  />
+                  <span class="ztp_sound_volume_value">50</span>%
+                </label>
+              </div>
               <p>Make extra noise when typing and error happens.</p>
             </form>
           </div>
@@ -650,18 +730,26 @@
           <h3>Text Generator</h3>
           <form name="add_more_letter">
             <div class="ztp_add_letters_to_text">
-              <p>Add more letters to Text:</p>
+              <label>Add more letters to Text:</label>
               <input
                 type="range"
                 name="add_letter"
                 id="ztp_add_letter"
-                min="250"
-                max="350"
-                value="250"
+                min="150"
+                max="250"
+                value="150"
               />
-              <p style="text-align: center;"><b class="ztp_character_amount" style="color: #888888;">250</b> characters per season</p>
+              <p style="text-align: center">
+                <b class="ztp_character_amount" style="color: #888888">150</b>
+                characters per season
+              </p>
             </div>
-
+            <p>
+              You can add character to your editor from 250 up to 350 for typing
+              at one breth. It doesn't matter how much character you have added
+              to your editor, it will generate text automatically each time you
+              get to the end of the text by typing.
+            </p>
             <label for="ztp_auto_text">
               <input
                 type="radio"
@@ -688,7 +776,7 @@
             <h4>Auto Generate Text</h4>
             <div class="ztp_setting_adable_letters">
               <form name="add_character_form">
-                <p>Add more Character to Text:</p>
+                <label>Add more Alphabet to Text:</label>
                 <input
                   type="range"
                   name="add_character"
@@ -729,17 +817,19 @@
               </form>
             </div>
             <div class="ztp_setting_inner_section">
-              <form action="">
+              <form name="enable_capital_punctuation">
                 <input
                   type="checkbox"
-                  name="auto_generate"
+                  name="enable_capital"
                   id="ztp_enable_caps"
+                  oninput="auto_generate_text()"
                 />
                 <label for="ztp_enable_caps">Enable capital letters</label>
                 <input
                   type="checkbox"
-                  name="auto_generate"
+                  name="enable_punctuation"
                   id="ztp_enable_punc"
+                  oninput="auto_generate_text()"
                 />
                 <label for="ztp_enable_punc">
                   Enable punctuation characters
@@ -756,6 +846,24 @@
                 name="usertext"
                 id="user_text_input_area"
               ></textarea>
+              <p
+                style="
+                  display: flex;
+                  display: -webkit-flex;
+                  justify-content: space-between;
+                "
+              >
+                <small
+                  >Minimum
+                  <span class="ztp_minimum_character_amount">250</span>
+                  Characters</small
+                ><span
+                  ><small
+                    >Character count:
+                    <span class="ztp_pest_text_character_count">00</span></small
+                  ></span
+                >
+              </p>
               <button name="generate_text_from_input" type="button">
                 Generate
               </button>
@@ -767,13 +875,13 @@
             ></div>
           </div>
         </div>
+        <button
+          class="ztp_setting_done_button"
+          onclick="this.parentNode.parentNode.classList.remove('ztp_container_active')"
+        >
+          Done
+        </button>
       </div>
-      <button
-        class="ztp_setting_done_button"
-        onclick="this.parentNode.classList.remove('ztp_container_active')"
-      >
-        Done
-      </button>
       <div
         class="ztp_cross"
         onclick="this.parentNode.classList.remove('ztp_container_active');"
